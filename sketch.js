@@ -12,6 +12,7 @@ var score=0;
 
 var gameOver, restart;
 
+
 localStorage["HighestScore"] = 0;
 
 function preload(){
@@ -31,6 +32,7 @@ function preload(){
   
   gameOverImg = loadImage("gameOver.png");
   restartImg = loadImage("restart.png");
+
 }
 
 function setup() {
@@ -64,7 +66,8 @@ function setup() {
   
   cloudsGroup = new Group();
   obstaclesGroup = new Group();
-  
+  birdsGroup = new Group();
+
   score = 0;
 }
 
@@ -92,10 +95,13 @@ gameOver.depth = gameOver.depth +1
     trex.collide(invisibleGround);
     spawnClouds();
     spawnObstacles();
+   
   
     if(obstaclesGroup.isTouching(trex)){
         gameState = END;
     }
+
+  
   }
   else if (gameState === END) {
     gameOver.visible = true;
@@ -127,7 +133,7 @@ function spawnClouds() {
   //write code here to spawn the clouds
   if (frameCount % 110 === 0) {
     var cloud = createSprite(600,100,40,10);
-    cloud.y = Math.round(random(80,120));
+    cloud.y = Math.round(random(60,120));
     cloud.addImage(cloudImage);
     cloud.scale = 0.15;
     cloud.velocityX = -3;
@@ -177,6 +183,9 @@ function spawnObstacles() {
     obstaclesGroup.add(obstacle);
   }
 }
+
+
+
 
 function reset(){
   gameState = PLAY;
